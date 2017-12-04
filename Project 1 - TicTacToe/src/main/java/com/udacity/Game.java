@@ -151,6 +151,57 @@ public class Game {
     public String checkGameWinner(char [][]grid){
         String result = "None";
         //Student code goes here ...
+
+        // horizontal check (-)
+        for (int i = 0; i < 3; i++){
+            if (grid[0][i] != '-' && grid[0][i] == grid[1][i] && grid[1][i] == grid[2][i]){
+                // useChar == X or O
+                char useChar = Character.toUpperCase(grid[0][i]);
+                result = useChar + " wins";
+                break;
+            }
+        }
+        // vertical check (|)
+        if (result == "None"){
+            for (int i = 0; i < 3; i++){
+                if (grid[i][0] != '-' && grid[i][0] == grid[i][1] && grid[i][1] == grid[i][2]){
+                    // useChar == X or O
+                    char useChar = Character.toUpperCase(grid[i][0]);
+                    result = useChar + " wins";
+                    break;
+                }
+            }
+        }
+        // diagonal check (\ or /)
+        if (result == "None"){
+            // \ check
+            if (grid[0][0] != '-' && grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2]){
+                // useChar == X or O
+                char useChar = Character.toUpperCase(grid[0][0]);
+                result = useChar + " wins";
+            }
+            // / check
+            if (grid[2][0] != '-' && grid[2][0] == grid[1][1] && grid[1][1] == grid[0][2]){
+                // useChar == X or O
+                char useChar = Character.toUpperCase(grid[2][0]);
+                result = useChar + " wins";
+            }
+        }
+        // tie check
+        if (result == "None"){
+            int countEmpty = 0;
+            for (int i = 0; i < 3; i++){
+                for (int j = 0; j < 3; j++){
+                    if (grid[i][j] == '-'){
+                        countEmpty++;
+                    }
+                }
+            }
+            if (countEmpty == 0){
+                result = "Tie";
+            }
+        }
+
         return result;
     }
 
